@@ -1,0 +1,53 @@
+# Source files (only publish compiled JS)
+src/
+test/
+*.spec.ts
+
+# Configuration files
+.eslintrc.js
+.eslintignore
+.prettierrc
+jest.config.ts
+tsconfig.json
+tsconfig.build.json
+tsconfig.demo.json
+typedoc.json
+
+# Documentation build
+doc/
+
+# Demo files
+demo/
+
+# Scripts
+scripts/
+
+# Git files
+.git/
+.gitignore
+.gitattributes
+
+# CI/CD
+.github/
+
+# IDE files
+.vscode/
+.DS_Store
+
+# Dependencies
+node_modules/
+
+# Coverage and test outputs
+coverage/
+*.log
+
+# Generated GIF files (examples)
+*.gif
+
+# Husky
+.husky/
+
+# Build artifacts that shouldn't be published
+out/
+*.tsbuildinfo
+.eslintcache

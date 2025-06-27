@@ -1,0 +1,129 @@
+{
+  "name": "gif-tools",
+  "version": "0.0.1",
+  "description": "A robust, zero-dependency TypeScript library for creating GIF files with support for both static and animated GIFs. Built with modern TypeScript features and designed to work in both Node.js and browser environments.",
+  "main": "./lib/src/index.js",
+  "types": "./lib/src/index.d.ts",
+  "files": [
+    "lib/src/**/*"
+  ],
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "build:demo": "tsc --project tsconfig.demo.json",
+    "build:docs": "typedoc",
+    "demo": "npm run build:demo && npx serve demo",
+    "clean": "rm -rf ./lib/ ./demo/lib/",
+    "cm": "cz",
+    "lint": "eslint ./src/ --fix",
+    "prepare": "husky install",
+    "prepublishOnly": "npm run clean && npm run build && npm run test && npm run lint",
+    "semantic-release": "semantic-release",
+    "test:watch": "jest --watch",
+    "test": "NODE_OPTIONS='--max-old-space-size=8192' jest --coverage --verbose",
+    "typecheck": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ccashwell/gif-tools.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Chris Cashwell",
+    "email": "ccashwell@users.noreply.github.com",
+    "url": "https://github.com/ccashwell"
+  },
+  "engines": {
+    "node": ">=12.0"
+  },
+  "keywords": [
+    "gif",
+    "gif-animator",
+    "gif-creator",
+    "gif-maker",
+    "gif-tools",
+    "gif-writer",
+    "gif-quantizer",
+    "gif-encoder",
+    "gif-decoder",
+    "gif-parser",
+    "gif-reader",
+    "animated-gif",
+    "typescript"
+  ],
+  "bugs": {
+    "url": "https://github.com/ccashwell/gif-tools/issues"
+  },
+  "homepage": "https://github.com/ccashwell/gif-tools#readme",
+  "devDependencies": {
+    "@types/jest": "^27.5.2",
+    "@types/node": "^12.20.11",
+    "@typescript-eslint/eslint-plugin": "^5.59.0",
+    "@typescript-eslint/parser": "^5.59.0",
+    "commitizen": "^4.3.1",
+    "conventional-changelog-conventionalcommits": "^5.0.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^7.25.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "husky": "^6.0.0",
+    "jest": "^30.0.3",
+    "jest-util": "^30.0.2",
+    "lint-staged": "^13.2.1",
+    "prettier": "^2.2.1",
+    "semantic-release": "^21.0.1",
+    "serve": "^14.2.1",
+    "ts-jest": "^29.4.0",
+    "ts-node": "^10.2.1",
+    "typedoc": "^0.25.0",
+    "typescript": "^4.9.5"
+  },
+  "lint-staged": {
+    "*.ts": "eslint --cache --cache-location .eslintcache --fix"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ],
+    "plugins": [
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "preset": "conventionalcommits",
+          "releaseRules": [
+            {
+              "type": "build",
+              "scope": "deps",
+              "release": "patch"
+            }
+          ]
+        }
+      ],
+      [
+        "@semantic-release/release-notes-generator",
+        {
+          "preset": "conventionalcommits",
+          "presetConfig": {
+            "types": [
+              {
+                "type": "feat",
+                "section": "Features"
+              },
+              {
+                "type": "fix",
+                "section": "Bug Fixes"
+              },
+              {
+                "type": "build",
+                "section": "Dependencies and Other Build Updates",
+                "hidden": false
+              }
+            ]
+          }
+        }
+      ],
+      "@semantic-release/npm",
+      "@semantic-release/github"
+    ]
+  }
+}
