@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "A robust, zero-dependency TypeScript library for creating GIF files with support for both static and animated GIFs. Built with modern TypeScript features and designed to work in both Node.js and browser environments.",
   "main": "./lib/src/index.js",
+  "module": "./lib/src/index.js",
   "types": "./lib/src/index.d.ts",
+  "type": "module",
   "files": [
     "lib/src/**/*"
   ],
@@ -11,7 +13,7 @@
     "build": "tsc --project tsconfig.build.json",
     "build:demo": "tsc --project tsconfig.demo.json",
     "build:docs": "typedoc",
-    "demo": "npm run build:demo && npx serve demo",
+    "demo": "npx serve demo",
     "clean": "rm -rf ./lib/ ./demo/lib/",
     "cm": "cz",
     "lint": "eslint ./src/ --fix",

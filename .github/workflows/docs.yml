@@ -41,6 +41,51 @@ jobs:
       - name: Build documentation
         run: npm run build:docs
 
+      - name: Copy demo to docs
+        run: |
+          mkdir -p ./doc/demo
+          cp -r ./demo/* ./doc/demo/
+
+      - name: Create navigation index
+        run: |
+          cat > ./doc/nav.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <title>GIF Tools - Documentation & Demo</title>
+            <style>
+              body { font-family: system-ui, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
+              .nav-card { background: #f8f9fa; border-radius: 8px; padding: 30px; margin: 20px 0; border: 1px solid #dee2e6; }
+              .nav-card h2 { color: #495057; margin-bottom: 15px; }
+              .nav-card p { color: #6c757d; margin-bottom: 20px; }
+              .nav-button { display: inline-block; background: #007bff; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; }
+              .nav-button:hover { background: #0056b3; }
+            </style>
+          </head>
+          <body>
+            <h1>🎨 GIF Tools Library</h1>
+            <p>A robust, zero-dependency TypeScript library for creating and manipulating GIF files.</p>
+            <div class="nav-card">
+              <h2>📚 API Documentation</h2>
+              <p>Complete TypeDoc-generated API reference with all classes, interfaces, and functions.</p>
+              <a href="./index.html" class="nav-button">View API Docs</a>
+            </div>
+            <div class="nav-card">
+              <h2>🎮 Interactive Demo</h2>
+              <p>Try the library in your browser with live examples and pattern generators.</p>
+              <a href="./demo/index.html" class="nav-button">Launch Demo</a>
+            </div>
+            <div class="nav-card">
+              <h2>🔗 Links</h2>
+              <p>
+                <a href="https://github.com/ccashwell/gif-tools">GitHub Repository</a> •
+                <a href="https://www.npmjs.com/package/gif-tools">NPM Package</a>
+              </p>
+            </div>
+          </body>
+          </html>
+          EOF
+
       - name: Setup Pages
         if: github.ref == 'refs/heads/main'
         uses: actions/configure-pages@v4
