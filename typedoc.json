@@ -1,6 +1,7 @@
 {
   "$schema": "https://typedoc.org/schema.json",
   "entryPoints": ["./src/index.ts"],
+  "tsconfig": "./tsconfig.docs.json",
   "out": "doc",
   "name": "GIF Tools",
   "readme": "README.md",
