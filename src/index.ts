@@ -33,14 +33,9 @@ export {
 } from './helpers.js';
 
 // GIF reading capabilities
-export {
-  GifReader,
-  GifFrame,
-  GifInfo,
-  GifMetadata,
-  readGifInfo,
-  isValidGif,
-} from './reader.js';
+export { GifReader, readGifInfo, isValidGif } from './reader.js';
+
+export type { GifFrame, GifInfo, GifMetadata } from './reader.js';
 
 // Frame manipulation utilities
 export {
@@ -53,6 +48,9 @@ export {
   reverseGif,
   changeGifSpeed,
   manipulateGif,
+} from './frame-utils.js';
+
+export type {
   CropOptions,
   ResizeOptions,
   RotateOptions,
@@ -68,6 +66,9 @@ export {
   createFractalGif,
   createGeometricGif,
   createSpiralGif,
+} from './patterns.js';
+
+export type {
   NoiseOptions,
   FractalOptions,
   GeometricOptions,

@@ -7,12 +7,12 @@ const config = {
     '!<rootDir>/src/types/**/*.ts',
   ],
   moduleNameMapper: {
-    '^(..?/.+).js$': '$1',
+    '^(..?/.+)\\.js$': '$1',
+    '^../src$': '<rootDir>/src/index.ts',
+    '^../src/(.*)$': '<rootDir>/src/$1',
   },
-  globals: {
-    transform: {
-      '^.+.tsx?$': ['ts-jest', { isolatedModules: true }],
-    },
+  transform: {
+    '^.+\\.tsx?$': ['ts-jest'],
   },
   testTimeout: 10000,
 };
