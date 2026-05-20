@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Test
+    uses: ./.github/workflows/pr.yml
+
+  codeql:
+    name: CodeQL
+    uses: ./.github/workflows/codeql-analysis.yml
+
+  release:
+    name: Release
+    # Only release from main, after tests pass. NPM_TOKEN is a repo secret
+    # consumed by semantic-release inside release.yml.
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [test]
+    uses: ./.github/workflows/release.yml
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
