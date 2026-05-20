@@ -6,6 +6,9 @@
   "module": "./lib/src/index.js",
   "types": "./lib/src/index.d.ts",
   "type": "module",
+  "bin": {
+    "gif-tools": "./lib/src/cli/index.js"
+  },
   "files": [
     "lib/src/**/*"
   ],
