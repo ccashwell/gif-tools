@@ -122,7 +122,7 @@ export class GifResult {
    * }
    * ```
    */
-  toBuffer(): Uint8Array | unknown {
+  toBuffer(): unknown {
     // In Node.js, return Buffer; in browser, return Uint8Array
     try {
       const globalBuffer = (
@@ -252,7 +252,7 @@ export class GifResult {
     }
     // Cast: ArrayBufferLike in newer lib.dom.d.ts no longer satisfies BlobPart's
     // ArrayBuffer-only constraint, but the runtime accepts Uint8Array fine.
-    return new Blob([this.data as BlobPart], { type: 'image/gif' });
+    return new Blob([this.data], { type: 'image/gif' });
   }
 
   /**
@@ -452,7 +452,7 @@ export class GifResult {
       } else {
         throw new Error('fs.promises.writeFile is not available');
       }
-    } catch (error) {
+    } catch {
       // Always throw an error indicating fs is not available
       throw new Error(
         'File system operations are not available in this environment'

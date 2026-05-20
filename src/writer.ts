@@ -67,7 +67,7 @@ export class ByteArrayOutputStream implements OutputStream {
   /**
    * Returns the written data as Buffer (Node.js) or Uint8Array (browser)
    */
-  toBuffer(): Uint8Array | unknown {
+  toBuffer(): unknown {
     // In Node.js, return Buffer; in browser, return Uint8Array
     try {
       const globalBuffer = (
