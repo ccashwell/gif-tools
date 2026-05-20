@@ -267,7 +267,7 @@ export async function rotateCommand(
   if (!(ROTATE_ANGLES as readonly number[]).includes(angleNum)) {
     throw new CliError(`--angle must be one of ${ROTATE_ANGLES.join(', ')}`);
   }
-  const angle = angleNum as typeof ROTATE_ANGLES[number];
+  const angle = angleNum as (typeof ROTATE_ANGLES)[number];
 
   const result = await processGifFrames(
     input,

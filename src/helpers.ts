@@ -520,8 +520,8 @@ export function createGradientGif(
         direction === 'horizontal'
           ? x / (width - 1)
           : direction === 'vertical'
-          ? y / (height - 1)
-          : (x + y) / (width + height - 2);
+            ? y / (height - 1)
+            : (x + y) / (width + height - 2);
 
       // Interpolate colors
       const red = Math.round(

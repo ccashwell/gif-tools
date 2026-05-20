@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { GifResult, createSolidColorGif } from '../src';
 
 describe('GifResult', () => {
@@ -23,7 +20,7 @@ describe('GifResult', () => {
     });
 
     it('should throw error for invalid data', () => {
-      expect(() => new GifResult(null as unknown as Uint8Array)).toThrow(
+      expect(() => new GifResult(null)).toThrow(
         'GIF data must be a Uint8Array'
       );
       expect(() => new GifResult(new Uint8Array(0))).toThrow(
@@ -187,7 +184,10 @@ describe('GifResult', () => {
       const originalBlob = global.Blob;
       if (typeof Blob === 'undefined') {
         (global as any).Blob = class MockBlob {
-          constructor(public data: any[], public options: any) {}
+          constructor(
+            public data: any[],
+            public options: any
+          ) {}
         };
       }
 
@@ -229,7 +229,10 @@ describe('GifResult', () => {
         createObjectURL: jest.fn().mockReturnValue('blob:mock-url'),
       };
       (global as any).Blob = class MockBlob {
-        constructor(public data: any[], public options: any) {}
+        constructor(
+          public data: any[],
+          public options: any
+        ) {}
       };
 
       try {
@@ -370,7 +373,10 @@ describe('GifResult', () => {
         revokeObjectURL: jest.fn(),
       };
       (global as any).Blob = class MockBlob {
-        constructor(public data: any[], public options: any) {}
+        constructor(
+          public data: any[],
+          public options: any
+        ) {}
       };
 
       try {

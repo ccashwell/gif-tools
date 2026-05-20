@@ -85,7 +85,10 @@ export interface AnimationOptions {
 
 /** Error types */
 export class GifError extends Error {
-  constructor(message: string, public readonly code?: string) {
+  constructor(
+    message: string,
+    public readonly code?: string
+  ) {
     super(message);
     this.name = 'GifError';
   }

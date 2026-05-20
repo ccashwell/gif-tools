@@ -1,5 +1,4 @@
 import {
-  ImageData,
   GifReader,
   readGifInfo,
   isValidGif,

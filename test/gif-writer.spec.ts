@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import {
   GifWriter,
   ByteArrayOutputStream,
@@ -350,9 +347,9 @@ describe('GIF Writer', () => {
 
     it('should create GIFs in browser-like environment', () => {
       // Temporarily hide Buffer to simulate browser environment
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
       const originalBuffer = (globalThis as any).Buffer;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
       delete (globalThis as any).Buffer;
 
       try {
