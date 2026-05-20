@@ -252,7 +252,7 @@ export class GifResult {
     }
     // Cast: ArrayBufferLike in newer lib.dom.d.ts no longer satisfies BlobPart's
     // ArrayBuffer-only constraint, but the runtime accepts Uint8Array fine.
-    return new Blob([this.data], { type: 'image/gif' });
+    return new Blob([this.data as BlobPart], { type: 'image/gif' });
   }
 
   /**
@@ -448,7 +448,7 @@ export class GifResult {
       const buffer = this.toBuffer();
 
       if (fs.promises && fs.promises.writeFile) {
-        await fs.promises.writeFile(filepath, buffer as any);
+        await fs.promises.writeFile(filepath, buffer as Uint8Array);
       } else {
         throw new Error('fs.promises.writeFile is not available');
       }
