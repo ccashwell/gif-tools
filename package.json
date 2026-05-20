@@ -77,7 +77,6 @@
     "lint-staged": "^13.2.1",
     "prettier": "^2.2.1",
     "semantic-release": "^21.0.1",
-    "serve": "^14.2.1",
     "ts-jest": "^29.4.0",
     "ts-node": "^10.2.1",
     "typedoc": "^0.25.0",
