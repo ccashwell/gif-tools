@@ -4,5 +4,5 @@
     "module": "es2020",
     "target": "es2018"
   },
-  "exclude": ["test/**/*.spec.ts"]
+  "exclude": ["test/**/*"]
 }

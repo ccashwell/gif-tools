@@ -250,7 +250,9 @@ export class GifResult {
     if (typeof Blob === 'undefined') {
       throw new GifValidationError('Blob is not available in this environment');
     }
-    return new Blob([this.data], { type: 'image/gif' });
+    // Cast: ArrayBufferLike in newer lib.dom.d.ts no longer satisfies BlobPart's
+    // ArrayBuffer-only constraint, but the runtime accepts Uint8Array fine.
+    return new Blob([this.data as BlobPart], { type: 'image/gif' });
   }
 
   /**
