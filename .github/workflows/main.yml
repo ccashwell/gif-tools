@@ -6,6 +6,16 @@ on:
   pull_request:
     branches: [main]
 
+# Reusable workflows can't request more permissions than the caller, so we
+# declare the union of what release.yml and codeql-analysis.yml need.
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  actions: read
+  security-events: write
+  id-token: write
+
 jobs:
   test:
     name: Test
