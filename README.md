@@ -25,6 +25,9 @@ designed to work in both Node.js and browser environments.
 npm install gif-tools
 ```
 
+Installing globally (or with `npx`) also exposes a `gif-tools` command. See
+[Command-line interface](#command-line-interface) below.
+
 ## Quick Start
 
 ### Creating a Static GIF
@@ -438,6 +441,99 @@ function displayFrames(frames: GifFrame[]) {
   });
 }
 ```
+
+## Command-line interface
+
+`gif-tools` ships with a CLI that exposes the bulk of the library from the
+terminal — useful for one-off conversions, scripting, or experimenting without
+writing TypeScript. It runs on Node and stays zero-dependency.
+
+### Installing
+
+```bash
+# project-local
+npx gif-tools --help
+
+# globally
+npm install -g gif-tools
+gif-tools --help
+```
+
+### Quick recipes
+
+```bash
+# Inspect a GIF
+gif-tools info input.gif --dominant 5
+
+# Create a 64×64 red square
+gif-tools create solid red.gif --width 64 --height 64 --color "#ff0000"
+
+# Animated gradient sweep
+gif-tools create animated-gradient sweep.gif \
+    -w 200 -h 100 --start "#ff0000" --end "#0000ff" \
+    --animation-type shift --frames 24 --delay 80
+
+# Resize to 50% of original
+gif-tools resize input.gif -o small.gif --scale 0.5
+
+# Apply per-frame transforms
+gif-tools crop   input.gif -o crop.gif --x 10 --y 10 --width 100 --height 100
+gif-tools rotate input.gif -o rot.gif --angle 90
+gif-tools flip   input.gif -o flip.gif --horizontal --vertical
+gif-tools adjust input.gif -o tweak.gif --brightness -0.1 --contrast 0.2 --saturation 0.3
+gif-tools blur   input.gif -o soft.gif --radius 2
+
+# Animation timing
+gif-tools reverse input.gif -o reversed.gif
+gif-tools speed   input.gif -o fast.gif --multiplier 2 --min-delay 20
+
+# Compression: re-quantize palette and/or downscale
+gif-tools optimize input.gif -o smaller.gif --max-colors 64 --scale 0.5
+
+# Extract every frame as its own GIF
+gif-tools extract input.gif --output-dir frames/
+```
+
+### Commands
+
+| Command                  | What it does |
+|--------------------------|--------------|
+| `info <input>`           | Print dimensions, frame count, duration, extensions, dominant colors |
+| `create <type> <output>` | Generate a new GIF — see "Create types" below |
+| `resize <input>`         | Resize frames by `--width`/`--height` and/or `--scale` |
+| `crop <input>`           | Crop to `--x --y --width --height` |
+| `rotate <input>`         | Rotate `--angle 90|180|270` |
+| `flip <input>`           | `--horizontal` and/or `--vertical` |
+| `adjust <input>`         | `--brightness` `--contrast` `--saturation` `--hue` |
+| `blur <input>`           | Box blur with `--radius N` |
+| `reverse <input>`        | Reverse frame order |
+| `speed <input>`          | `--multiplier 2` (faster) or `0.5` (slower); add `--min-delay`/`--max-delay` |
+| `optimize <input>`       | Re-encode with `--max-colors` and optional `--scale` |
+| `extract <input>`        | Write each frame as a separate GIF to `--output-dir` |
+
+### Create types
+
+| Type                | Required                                                                | Notable options |
+|---------------------|-------------------------------------------------------------------------|-----------------|
+| `solid`             | `--width --height --color`                                              | — |
+| `gradient`          | `--width --height --start --end`                                        | `--direction horizontal|vertical|diagonal` |
+| `animated-gradient` | `--width --height --start --end`                                        | `--animation-type shift|rotate|pulse|wave` `--frames --delay --loops --intensity --direction --max-colors` |
+| `checkerboard`      | `--width --height --color1 --color2`                                    | `--check-size` |
+| `noise`             | `--width --height`                                                      | `--type white|perlin|simplex` `--scale --seed --colors` |
+| `fractal`           | `--width --height`                                                      | `--type mandelbrot|julia|sierpinski` `--iterations --zoom --center-x --center-y --colors` |
+| `geometric`         | `--width --height`                                                      | `--shape circles|squares|triangles|hexagons` `--count --size-variation --colors --background` |
+| `spiral`            | `--width --height`                                                      | `--type archimedean|logarithmic|fibonacci` `--turns --thickness --colors` |
+
+### Conventions
+
+- **Colors** accept `r,g,b` (e.g. `255,128,0`), `#rrggbb` (e.g. `#ff8000`), or
+  `#rgb` (e.g. `#f80`).
+- **Color lists** (`--colors` on pattern commands) use `;` as the separator
+  since `,` is reserved for RGB triplets: `"255,0,0;0,255,0;0,0,255"`.
+- Output files are written via `--output`/`-o` for edit commands and as the
+  first positional after the create type for `create`.
+- `--quiet` (`-q`) silences status output. `--help` (`-h`) prints usage. Set
+  `DEBUG=1` in the environment to include stack traces on errors.
 
 ## API Reference
 
