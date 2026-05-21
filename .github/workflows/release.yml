@@ -1,9 +1,15 @@
 name: Release
 on:
   workflow_call:
-    secrets:
-      NPM_TOKEN:
-        required: true
+
+# `id-token: write` is what lets the npm CLI exchange GitHub's OIDC
+# token for short-lived npm credentials (trusted publishing). The
+# caller (main.yml) also needs to declare this, which it does.
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  id-token: write
 
 jobs:
   release:
@@ -27,7 +33,6 @@ jobs:
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
       - name: Upload Code Coverage
         uses: codecov/codecov-action@v5

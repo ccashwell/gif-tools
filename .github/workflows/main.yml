@@ -27,10 +27,9 @@ jobs:
 
   release:
     name: Release
-    # Only release from main, after tests pass. NPM_TOKEN is a repo secret
-    # consumed by semantic-release inside release.yml.
+    # Only release from main, after tests pass. npm auth is via OIDC
+    # trusted publishing — see release.yml for the id-token permission
+    # and npmjs.com → gif-tools → Trusted Publishers for the config.
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: [test]
     uses: ./.github/workflows/release.yml
-    secrets:
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
