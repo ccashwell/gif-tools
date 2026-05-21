@@ -79,6 +79,9 @@
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.59.4"
   },
+  "overrides": {
+    "@semantic-release/npm": "^13.1.5"
+  },
   "lint-staged": {
     "*.ts": "eslint --cache --cache-location .eslintcache --fix"
   },
